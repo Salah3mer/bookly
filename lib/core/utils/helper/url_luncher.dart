@@ -1,0 +1,17 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+Future<void> launchCustomUr(context, String? url) async {
+  if (url != null) {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+      print("launching $url");
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Cannot launch $url')),
+      );
+    }
+  }
+}
